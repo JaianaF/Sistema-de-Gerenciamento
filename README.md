@@ -20,15 +20,15 @@ git clone https://github.com/JaianaF/Sistema-de-Gerenciamento.git
     composer dump-autoload
 
 4. Crie o banco de dados e as tabelas executando o script `dump.sql` no MySQL:
-    mysql -u root -p
+    - mysql -u root -p
 
 5. Configure a conexão com o banco de dados no arquivo `src/utils/Database.php`.
 
 6. Inicie o servidor embutido do PHP:
-    php -S localhost:8000 -t public
+    - php -S localhost:8000 -t public
 
 7. Acesse a aplicação no navegador:
-    http://localhost:8000
+    - http://localhost:8000
 
 
 ## Funcionalidades
