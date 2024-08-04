@@ -163,3 +163,48 @@ table th {
 .action-buttons .delete:hover {
     background-color: #c0392b;
 }
+
+/* Estilo geral para a paginação */
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    display: inline;
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination a:hover,
+.pagination a.active {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: #ffffff;
+    border: 1px solid #007bff;
+    cursor: default;
+}
+
+.pagination .disabled {
+    color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}

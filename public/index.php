@@ -11,9 +11,9 @@
     <h1>Painel Administrativo</h1>
     <nav>
         <ul>
-            <li><a href="/views/aluno/create.php">Gerenciar Alunos</a></li>
+            <li><a href="/views/aluno/list.php">Gerenciar Alunos</a></li>
             <li><a href="/views/turma/list.php">Gerenciar Turmas</a></li>
-            <li><a href="/views/matriculas/create.php">Gerenciar Matrículas</a></li>
+            <li><a href="/views/matriculas/list.php">Gerenciar Matrículas</a></li>
         </ul>
     </nav>
     <a href="/logout.php">Logout</a>

@@ -21,6 +21,14 @@
         <div class="action-buttons">
             <a href="/views/aluno/create.php">Cadastrar Novo Aluno</a>
         </div>
+
+        <!-- Formulário de busca -->
+        <form method="get" action="">
+            <label for="search">Buscar Aluno:</label>
+            <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>" placeholder="Digite o nome do aluno">
+            <button type="submit">Buscar</button>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -31,6 +39,28 @@
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                $alunos = [
+                    ['id' => 1, 'nome' => 'João Silva', 'data_nascimento' => '2000-01-15', 'usuario' => 'joao.silva'],
+                    ['id' => 2, 'nome' => 'Ana Oliveira', 'data_nascimento' => '1999-11-23', 'usuario' => 'ana.oliveira'],
+                    ['id' => 3, 'nome' => 'Maria Oliveira', 'data_nascimento' => '1999-11-23', 'usuario' => 'maria.oliveira'],
+                    ['id' => 4, 'nome' => 'Barbara faria', 'data_nascimento' => '2000-11-30', 'usuario' => 'Barbara.faria'],
+                ];
+
+                if (isset($_GET['search']) && !empty($_GET['search'])) {
+                    $search = $_GET['search'];
+                    $alunos = array_filter($alunos, function($aluno) use ($search) {
+                        // Verifica se o nome contém o texto de busca
+                        return stripos($aluno['nome'], $search) !== false;
+                    });
+                }
+
+                // Ordenar a lista de alunos por nome em ordem alfabética
+                usort($alunos, function($a, $b) {
+                    return strcmp($a['nome'], $b['nome']);
+                });
+                ?>
+
                 <?php if (!empty($alunos)): ?>
                     <?php foreach ($alunos as $aluno): ?>
                         <tr>

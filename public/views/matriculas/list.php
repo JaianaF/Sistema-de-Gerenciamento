@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,6 +23,14 @@
         <div class="action-buttons">
             <a href="/views/matriculas/create.php">Cadastrar Aluno</a>
         </div>
+
+        <!-- Formulário de busca -->
+        <form method="get" action="">
+            <label for="search">Buscar:</label>
+            <input type="text" id="search" name="search" value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>" placeholder="Digite o nome do aluno, ID ou nome da turma">
+            <button type="submit">Buscar</button>
+        </form>
+
         <table border="1">
             <thead>
                 <tr>
@@ -34,6 +40,28 @@
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                $matriculas = [
+                    ['id' => 1, 'aluno_nome' => 'João Silva', 'turma_nome' => 'Matemática Avançada'],
+                    ['id' => 2, 'aluno_nome' => 'Ana Oliveira', 'turma_nome' => 'Programação em PHP'],
+                    ['id' => 3, 'aluno_nome' => 'Maria Oliveira', 'turma_nome' => 'História Mundial'],
+                ];
+
+                if (isset($_GET['search']) && !empty($_GET['search'])) {
+                    $search = $_GET['search'];
+                    $matriculas = array_filter($matriculas, function($matricula) use ($search) {
+                        // Verifica se o nome do aluno, o ID ou o nome da turma contém o texto de busca
+                        return stripos($matricula['aluno_nome'], $search) !== false || 
+                               strpos($matricula['id'], $search) !== false ||
+                               stripos($matricula['turma_nome'], $search) !== false;
+                    });
+                }
+
+                usort($matriculas, function($a, $b) {
+                    return strcmp($a['aluno_nome'], $b['aluno_nome']);
+                });
+                ?>
+
                 <?php if (!empty($matriculas)): ?>
                     <?php foreach ($matriculas as $matricula): ?>
                         <tr>
@@ -44,7 +72,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="3">Nenhum aluno matriculado nesta turma.</td>
+                        <td colspan="3">Nenhum aluno matriculado encontrado.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
